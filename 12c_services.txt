@@ -1,0 +1,42 @@
+distributed link tracking client   -   	TrkWks
+
+dns client - 							Dnscache
+
+iisadmin   - 							IISADMIN
+
+inform  -  								PFService
+
+informsync - 							PFSyncService
+
+inform model -  						InForm Model Updater
+
+ipa  -									IPAService
+
+oracle 12c agent
+
+oracle client home manager 	-			OracleOraClient11g_home1ConfigurationManager
+
+www publishing - 						W3SVC
+
+inform adapter service - 				InFormServerAdapterService
+
+Inform server adapter service IA1371 -  InFormServerAdapterServiceIA1371
+
+
+OracleRemExecServiceV2
+
+OracleOraClient11g_home1CMAdmin
+
+OracleOraClient11g_home1CMan
+
+OracleOraClient11g_home1TNSListener
+
+OracleOraClient12Home1_32bitMTSRecoveryService
+
+OracleOraClient12Home1_32bitTNSListener
+
+Argus Safety Windows Service
+
+Argus Web Service
+
+Argus Insight Service

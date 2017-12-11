@@ -1,0 +1,45 @@
+set ORACLE_HOME=
+:: delims is a TAB followed by a space
+FOR /F "tokens=3* delims= " %%A IN ('reg query HKEY_LOCAL_MACHINE\SOFTWARE\ORACLE\KEY_OraClient12Home1\ /v ORACLE_HOME') DO SET ORACLE_HOME=%%A
+
+set PATH=%%ORACLE_HOME%%\bin;%%PATH%%
+
+set PATH=%%ORACLE_HOME%%\OPatch;%%PATH%%
+
+set PATH=%%ORACLE_HOME%%\perl\bin;%%PATH%%
+
+net stop OracleOraClient12Home1MTSRecoveryService
+
+net stop MSDTC
+
+rd /s /q C:\tmp_patch
+
+mkdir C:\tmp_patch
+
+cd C:\tmp_patch
+
+%%WINDIR%%\System32\WindowsPowerShell\v1.0\powershell.exe -Command "& {Invoke-WebRequest http://slc06mye.us.oracle.com/software/vendors/OEM_patches/wgetwin-1_5_3_1-binary.zip -OutFile C:\tmp_patch\wgetwin-1_5_3_1-binary.zip }"
+
+unzip wgetwin-1_5_3_1-binary.zip 
+
+wget http://slc06mye.us.oracle.com/software/vendors/OEM_patches/p26720785_121020_MSWIN-x86-64.zip
+
+unzip p26720785_121020_MSWIN-x86-64.zip
+
+cd 26720785
+
+call opatch apply -silent
+
+cd %%ORACLE_HOME%%\ODP.NET\bin\2.x
+
+rd /s /q C:\tmp_patch
+
+oraprovcfg.exe /action:gac /providerpath:Oracle.DataAccess.dll
+
+IISRESET
+
+net start OracleOraClient12Home1MTSRecoveryService
+
+net start MSDTC
+
+
