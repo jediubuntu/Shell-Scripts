@@ -15,7 +15,7 @@ set PATH=%ORACLE_HOME%\OPatch;%PATH%
 set PATH=%ORACLE_HOME%\perl\bin;%PATH%
 
 net stop IISADMIN
-net stop OracleOraClient12Home1_32bitMTSRecoveryService
+net stop OracleOraClient12Home1MTSRecoveryService
 net stop MSDTC
 net stop TrkWks
 net stop Dnscache
@@ -23,7 +23,6 @@ net stop PFService
 net stop PFSyncService
 net stop InForm Model Updater
 net stop IPAService
-net stop OracleOraClient11g_home1ConfigurationManager
 net stop W3SVC
 net stop InFormServerAdapterService
 net stop InFormServerAdapterServiceIA1371
@@ -55,7 +54,7 @@ rd /s /q C:\tmp_patch
 oraprovcfg.exe /action:gac /providerpath:Oracle.DataAccess.dll
 
 net start IISADMIN
-net start OracleOraClient12Home1_32bitMTSRecoveryService
+net start OracleOraClient12Home1MTSRecoveryService
 net start MSDTC
 net start TrkWks
 net start Dnscache
