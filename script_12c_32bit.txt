@@ -1,3 +1,9 @@
+@echo off
+net use S: /d
+net use S: \\slc14urx\patches /user:guest
+net use 
+dir S:
+
 set ORACLE_HOME=
 :: delims is a TAB followed by a space
 FOR /F "tokens=3* delims= " %%A IN ('reg query HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Oracle\KEY_OraClient12Home1_32bit /v ORACLE_HOME') DO SET ORACLE_HOME=%%A
@@ -9,8 +15,23 @@ set PATH=%ORACLE_HOME%\OPatch;%PATH%
 set PATH=%ORACLE_HOME%\perl\bin;%PATH%
 
 net stop OracleOraClient12Home1_32bitMTSRecoveryService
-
+net stop OracleOraClient12Home1_32bitTNSListener
+net stop IISADMIN
 net stop MSDTC
+net stop TrkWks
+net stop Dnscache
+net stop PFService
+net stop PFSyncService
+net stop InForm Model Updater
+net stop IPAService
+net stop W3SVC
+net stop InFormServerAdapterService
+net stop InFormServerAdapterServiceIA1371
+net stop OracleRemExecServiceV2
+net stop Argus Safety Windows Service
+net stop Argus Web Service
+net stop Argus Insight Service
+
 
 rd /s /q C:\tmp_patch
 
@@ -18,13 +39,9 @@ mkdir C:\tmp_patch
 
 cd C:\tmp_patch
 
-%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe -Command "& {Invoke-WebRequest http://slc06mye.us.oracle.com/software/vendors/OEM_patches/wgetwin-1_5_3_1-binary.zip -OutFile C:\tmp_patch\wgetwin-1_5_3_1-binary.zip }"
+cp S:\p26720785_121020_WINNT.zip C:\tmp_patch
 
-unzip wgetwin-1_5_3_1-binary.zip 
-
-wget http://slc06mye.us.oracle.com/software/vendors/OEM_patches/p26720785_121020_MSWIN-x86-64.zip
-
-unzip p26720785_121020_MSWIN-x86-64.zip
+unzip p26720785_121020_WINNT.zip
 
 cd 26720785
 
@@ -36,10 +53,20 @@ rd /s /q C:\tmp_patch
 
 oraprovcfg.exe /action:gac /providerpath:Oracle.DataAccess.dll
 
-IISRESET
-
 net start OracleOraClient12Home1_32bitMTSRecoveryService
-
+net start OracleOraClient12Home1_32bitTNSListener
 net start MSDTC
-
-
+net start IISADMIN
+net start MSDTC
+net start TrkWks
+net start Dnscache
+net start PFService
+net start PFSyncService
+net start InForm Model Updater
+net start IPAService
+net start W3SVC
+net start InFormServerAdapterService
+net start InFormServerAdapterServiceIA1371
+net start Argus Safety Windows Service
+net start Argus Web Service
+net start Argus Insight Service
