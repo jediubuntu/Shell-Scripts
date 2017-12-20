@@ -29,7 +29,7 @@ rm -f ${MW_HOME}/utils/bsu/cache_dir/*
 echo "################################################################################"
 echo "Download patch file"
 echo "################################################################################"
-wget http://slc06mye.us.oracle.com/software/vendors/OEM_patches/${PATCH_FILE}
+wget http://.us.oracle.com/software/vendors/OEM_patches/${PATCH_FILE}
 unzip ${PATCH_FILE}
 
 PATCH=$(ls *.jar | cut -d'.' --complement -f2-)
